@@ -14,6 +14,8 @@ PCRE_VERSION=8.21
 nginx_tarball_url=http://nginx.org/download/nginx-${NGINX_VERSION}.tar.gz
 pcre_tarball_url=http://sourceforge.net/projects/pcre/files/pcre/${PCRE_VERSION}/pcre-${PCRE_VERSION}.tar.bz2/download
 
+status "This new NEW!"
+
 root_directory=$(pwd)
 # remote: -----> /tmp/buildpack20151124-166-1ka98k6
 status "$root_directory"
