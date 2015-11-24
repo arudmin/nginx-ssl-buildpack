@@ -48,7 +48,7 @@ status "$ls_4"
 mkdir -p "$1/bin/"
 #cp "$root_directory/bin/nginx-cedar-14" "$1/bin/nginx"
 #nginx_version=$("$root_directory/bin/nginx-cedar-14" -V 2>&1 | head -1 | awk '{ print $NF }')
-cp "$root_directory/nginx-$NGINX_VERSION" "$1/bin/nginx"
+cp -r "$root_directory/nginx-$NGINX_VERSION" "$1/bin/nginx"
 status "nginx-buildpack: Installed ${NGINX_VERSION} to app/bin"
 
 cp "$root_directory/bin/start-nginx" "$1/bin/"
