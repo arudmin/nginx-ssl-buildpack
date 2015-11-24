@@ -24,6 +24,9 @@ ls_2=$(ls $root_directory/bin)
 status "$ls_1"
 status "$ls_2"
 
+# change to the BUILD_DIR ($1)
+cd $1
+
 status "Downloading $nginx_tarball_url"
 curl -L $nginx_tarball_url | tar xzv
 
@@ -39,17 +42,18 @@ status "Compiling nginx"
 
 status "Installing nginx"
 make install --silent
+status "nginx-buildpack: Installed ${NGINX_VERSION}"
 
-ls_3=$(pwd)
-ls_4=$(ls $ls_3)
-status "$ls_3"
-status "$ls_4"
+#ls_3=$(pwd)
+#ls_4=$(ls $ls_3)
+#status "$ls_3"
+#status "$ls_4"
 
 mkdir -p "$1/bin/"
 #cp "$root_directory/bin/nginx-cedar-14" "$1/bin/nginx"
 #nginx_version=$("$root_directory/bin/nginx-cedar-14" -V 2>&1 | head -1 | awk '{ print $NF }')
-cp -r "$root_directory/nginx-$NGINX_VERSION" "$1/bin/nginx"
-status "nginx-buildpack: Installed ${NGINX_VERSION} to app/bin"
+#cp -r "$root_directory/nginx-$NGINX_VERSION" "$1/bin/nginx"
+#status "nginx-buildpack: Installed ${NGINX_VERSION} to app/bin"
 
 cp "$root_directory/bin/start-nginx" "$1/bin/"
 status "nginx-buildpack: Added start-nginx to app/bin"
