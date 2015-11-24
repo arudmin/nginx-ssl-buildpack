@@ -42,12 +42,13 @@ status "Compiling nginx"
 
 status "Installing nginx"
 make install --silent
-status "nginx-buildpack: Installed ${NGINX_VERSION}"
 
-#ls_3=$(pwd)
-#ls_4=$(ls $ls_3)
-#status "$ls_3"
-#status "$ls_4"
+ls_3=$(pwd)
+ls_4=$(ls $ls_3)
+status "$ls_3"
+status "$ls_4"
+
+status "nginx-buildpack: Installed nginx-${NGINX_VERSION}"
 
 mkdir -p "$1/bin/"
 #cp "$root_directory/bin/nginx-cedar-14" "$1/bin/nginx"
