@@ -41,7 +41,7 @@ status "Installing nginx"
 make install --silent
 
 ls_3=$(pwd)
-ls_4=$(ls pwd)
+ls_4=$(ls $ls_3)
 status "$ls_3"
 status "$ls_4"
 
