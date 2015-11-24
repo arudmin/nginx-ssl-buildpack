@@ -15,6 +15,7 @@ nginx_tarball_url=http://nginx.org/download/nginx-${NGINX_VERSION}.tar.gz
 pcre_tarball_url=http://sourceforge.net/projects/pcre/files/pcre/${PCRE_VERSION}/pcre-${PCRE_VERSION}.tar.bz2/download
 
 root_directory=$(pwd)
+status "$root_directory"
 
 status "Downloading $nginx_tarball_url"
 curl -L $nginx_tarball_url | tar xzv
@@ -33,8 +34,7 @@ status "Installing nginx"
 make install --silent
 
 mkdir -p "$1/bin/"
-cd $root_directory
-cp "bin/nginx-$STACK" "$1/bin/nginx"
+cd $root_directory && cp "bin/nginx-$STACK" "$1/bin/nginx"
 nginx_version=$(./bin/nginx-$STACK -V 2>&1 | head -1 | awk '{ print $NF }')
 status "nginx-buildpack: Installed ${nginx_version} to app/bin"
 cp bin/start-nginx "$1/bin/"
