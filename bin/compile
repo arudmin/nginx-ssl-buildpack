@@ -17,8 +17,10 @@ pcre_tarball_url=http://sourceforge.net/projects/pcre/files/pcre/${PCRE_VERSION}
 root_directory=$(pwd)
 # remote: -----> /tmp/buildpack20151124-166-1ka98k6
 status "$root_directory"
-ls_output=$(ls $root_directory)
-status "$ls_output"
+ls_1=$(ls $root_directory)
+ls_2=$(ls $root_directory/bin)
+status "$ls_1"
+status "$ls_2"
 
 status "Downloading $nginx_tarball_url"
 curl -L $nginx_tarball_url | tar xzv
@@ -37,15 +39,15 @@ status "Installing nginx"
 make install --silent
 
 mkdir -p "$1/bin/"
-cd $root_directory && (mv /bin/nginx-cedar-14 "$1/bin/nginx")
+cp "$root_directory/bin/nginx-cedar-14" "$1/bin/nginx"
 nginx_version=$(./bin/nginx-$STACK -V 2>&1 | head -1 | awk '{ print $NF }')
 status "nginx-buildpack: Installed ${nginx_version} to app/bin"
 
-mv /bin/start-nginx "$1/bin/"
+cp "$root_directory/bin/start-nginx" "$1/bin/"
 status "nginx-buildpack: Added start-nginx to app/bin"
 
 mkdir -p "$1/config"
-mv /config/mime.types "$1/config/"
+cp "$root_directory/config/mime.types" "$1/config/"
 status "nginx-buildpack: Default mime.types copied to app/config/"
 
 if [[ ! -f $1/config/nginx.conf.erb ]]; then
