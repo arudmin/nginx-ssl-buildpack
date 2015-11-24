@@ -14,10 +14,6 @@ PCRE_VERSION=8.21
 nginx_tarball_url=http://nginx.org/download/nginx-${NGINX_VERSION}.tar.gz
 pcre_tarball_url=http://sourceforge.net/projects/pcre/files/pcre/${PCRE_VERSION}/pcre-${PCRE_VERSION}.tar.bz2/download
 
-build_dir=$1
-cache_dir=$2
-env_dir=$3
-
 status "Downloading $nginx_tarball_url"
 curl -L $nginx_tarball_url | tar xzv
 
@@ -34,20 +30,20 @@ status "Compiling nginx"
 status "Installing nginx"
 make install --silent
 
-mkdir -p "$build_dir/bin/"
-cp "bin/nginx-$STACK" "$build_dir/bin/nginx"
+mkdir -p "$1/bin/"
+cp "./bin/nginx-$STACK" "$1/bin/nginx"
 nginx_version=$(./bin/nginx-$STACK -V 2>&1 | head -1 | awk '{ print $NF }')
 status "nginx-buildpack: Installed ${nginx_version} to app/bin"
-cp bin/start-nginx "$build_dir/bin/"
+cp bin/start-nginx "$1/bin/"
 status "nginx-buildpack: Added start-nginx to app/bin"
 
-mkdir -p "$build_dir/config"
+mkdir -p "$1/config"
 
-cp config/mime.types "$build_dir/config/"
+cp config/mime.types "$1/config/"
 status "nginx-buildpack: Default mime.types copied to app/config/"
 
-if [[ ! -f $build_dir/config/nginx.conf.erb ]]; then
-	cp config/nginx.conf.erb "$build_dir/config/"
+if [[ ! -f $1/config/nginx.conf.erb ]]; then
+	cp config/nginx.conf.erb "$1/config/"
 	status "nginx-buildpack: Default config copied to app/config."
 else
 	status "nginx-buildpack: Custom config found in app/config."
