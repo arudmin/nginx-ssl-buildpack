@@ -7,7 +7,7 @@ This buildpack gives your app access to the `nginx` command compiled with SSL su
 Features
 ------
 
-* Downloads and compiles Nginx 1.5.7 with PCRE
+* Downloads and compiles Nginx 1.13.10 with PCRE
 * SSL support via `--with-http_ssl_module`
 * Adds `nginx` to your app's PATH
 * Additional files (mime.types, example configs, etc) are available at `$HOME/nginx` if you need them.
@@ -46,7 +46,7 @@ web: erb nginx.conf.erb > nginx.conf && nginx -c $HOME/nginx.conf
 The nginx.conf.erb can access environment variables like the port it needs to use.
 
 ```Nginx
-worker_processes <%= ENV['NGINX_WORKERS'] || 4 %>;
+worker_processes auto %>;
 daemon off;
 
 events {
@@ -55,7 +55,7 @@ events {
 
 http {
   server {
-    listen <%= ENV["PORT"] %>;
+    listen <%= ENV.Fetch('PORT') %>;
     server_name _;
 
     location / {
