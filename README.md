@@ -16,7 +16,7 @@ Features
 Usage
 ------
 
-You can check out a complete "hello world" example app at [nginx-ssl-buildpack-example](https://github.com/ddgromit/nginx-ssl-buildpack-example).
+You can check out a complete "hello world" example app at [nginx-ssl-buildpack-example](https://github.com/argus-api-team/nginx-ssl-buildpack).
 
 ### Creating a new app with this buildpack
 
@@ -25,7 +25,7 @@ You can check out a complete "hello world" example app at [nginx-ssl-buildpack-e
 heroku create
 
 # Set the buildpack URL
-heroku config:set BUILDPACK_URL=https://github.com/ddgromit/nginx-ssl-buildpack
+heroku config:set BUILDPACK_URL=https://github.com/argus-api-team/nginx-ssl-buildpack
 ```
 
 After adding the buildpack, `nginx` will be available on your path.  It is the responsibility of your app and it's `Procfile` to call nginx with a `nginx.conf` that you've generated. 
@@ -96,4 +96,4 @@ heroku config:set BUILDPACK_URL=<your-github-url>#your-branch
 Credits
 -----
 
-Parts of this codebase were taken from [ryandotsmith's nginx-buildpack](https://github.com/ryandotsmith/nginx-buildpack)
+Parts of this codebase were taken from [ryandotsmith's nginx-buildpack](https://github.com/ddgromit/nginx-ssl-buildpack)
