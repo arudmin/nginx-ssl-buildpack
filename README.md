@@ -7,7 +7,7 @@ This buildpack gives your app access to the `nginx` command compiled with SSL su
 Features
 ------
 
-* Downloads and compiles Nginx 1.15.7 with PCRE
+* Downloads and compiles Nginx 1.15.8 with PCRE
 * SSL support via `--with-http_ssl_module`
 * Adds `nginx` to your app's PATH
 * Additional files (mime.types, example configs, etc) are available at `$HOME/nginx` if you need them.
