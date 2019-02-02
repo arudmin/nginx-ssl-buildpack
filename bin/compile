@@ -40,8 +40,7 @@ cd ${1}/nginx-${NGINX_VERSION} && curl -L $rtmp_tarball_url | tar xzv
 
 status "$(pwd)"
 
-cd ${1}
-
+cd ${1}/nginx-${NGINX_VERSION}
 
 status "Compiling nginx"
 ./configure \
@@ -49,7 +48,7 @@ status "Compiling nginx"
   --prefix=/app/nginx \
   --with-http_ssl_module \
   --with-http_stub_status_module
-  --add-module=${1}/nginx-${NGINX_VERSION}/nginx-rtmp-module-${NGINX_RTMP_MODULE_VERSION}
+  --add-module=nginx-rtmp-module-${NGINX_RTMP_MODULE_VERSION}
   --with-debug
 
 status "Installing nginx"
