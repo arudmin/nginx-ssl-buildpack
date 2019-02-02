@@ -49,8 +49,8 @@ status "$(pwd)"
 # cd nginx-${NGINX_VERSION}
 
 status "Compiling nginx"
-status "/${temp_dir}/nginx-${NGINX_VERSION}/nginx-rtmp-module-${NGINX_RTMP_MODULE_VERSION}"
-status "(ls /${temp_dir}/nginx-${NGINX_VERSION}/nginx-rtmp-module-${NGINX_RTMP_MODULE_VERSION})"
+status "${temp_dir}/nginx-${NGINX_VERSION}/nginx-rtmp-module-${NGINX_RTMP_MODULE_VERSION}"
+status "(ls ${temp_dir}/nginx-${NGINX_VERSION}/nginx-rtmp-module-${NGINX_RTMP_MODULE_VERSION})"
 
 (
 cd nginx-${NGINX_VERSION}
@@ -59,7 +59,7 @@ cd nginx-${NGINX_VERSION}
   --prefix=/app/nginx \
   --with-http_ssl_module \
   --with-http_stub_status_module
-  --add-module=/${temp_dir}/nginx-${NGINX_VERSION}/nginx-rtmp-module-${NGINX_RTMP_MODULE_VERSION}
+  --add-module=${temp_dir}/nginx-${NGINX_VERSION}/nginx-rtmp-module-${NGINX_RTMP_MODULE_VERSION}
   --with-debug
 )
 status "Installing nginx"
