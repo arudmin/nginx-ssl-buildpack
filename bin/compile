@@ -44,9 +44,9 @@ cd nginx-${NGINX_VERSION} && curl -L $pcre_tarball_url | tar xvj
 status "Downloading $rtmp_tarball_url"
 curl -L $rtmp_tarball_url | tar xzv
 
-status "$(ls -la)"
+status "$(pwd)"
 
-cd nginx-${NGINX_VERSION}
+# cd nginx-${NGINX_VERSION}
 
 status "Compiling nginx"
 ./configure \
