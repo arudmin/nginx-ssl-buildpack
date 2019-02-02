@@ -30,7 +30,7 @@ status "$ls_2"
 cd $1
 
 status "Downloading $nginx_tarball_url"
-curl --silent --output /dev/null -L $nginx_tarball_url | tar xzv
+curl --silent -L $nginx_tarball_url | tar xzv
 
 status "Downloading $pcre_tarball_url"
 cd nginx-${NGINX_VERSION} && curl --silent -L $pcre_tarball_url | tar xvj
