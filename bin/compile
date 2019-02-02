@@ -37,9 +37,12 @@ cd ${1}/nginx-${NGINX_VERSION} && curl -L $pcre_tarball_url | tar xvj
 
 status "Downloading $rtmp_tarball_url"
 cd ${1}/nginx-${NGINX_VERSION} && curl -L $rtmp_tarball_url | tar xzv
+
 status "$(pwd)"
 
-cd ${1}/nginx-${NGINX_VERSION}
+cd ${1}
+
+
 status "Compiling nginx"
 ./configure \
   --with-pcre=pcre-${PCRE_VERSION} \
