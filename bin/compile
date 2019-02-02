@@ -33,10 +33,10 @@ status "Downloading $nginx_tarball_url"
 curl --silent -L $nginx_tarball_url | tar xzv
 
 status "Downloading $pcre_tarball_url"
-cd nginx-${NGINX_VERSION} && curl --silent -L $pcre_tarball_url | tar xvj
+cd ${1}/nginx-${NGINX_VERSION} && curl --silent -L $pcre_tarball_url | tar xvj
 
 status "Downloading $rtmp_tarball_url"
-cd nginx-${NGINX_VERSION} && curl --silent -L $rtmp_tarball_url | tar xvj
+cd ${1}/nginx-${NGINX_VERSION} && curl --silent -L $rtmp_tarball_url | tar xvj
 
 status "Compiling nginx"
 ./configure \
