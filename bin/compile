@@ -30,13 +30,13 @@ status "$ls_2"
 cd $1
 
 status "Downloading $nginx_tarball_url"
-curl -L $nginx_tarball_url | tar xzv
+curl --silent --output /dev/null -L $nginx_tarball_url | tar xzv
 
 status "Downloading $pcre_tarball_url"
-cd nginx-${NGINX_VERSION} && curl -L $pcre_tarball_url | tar xvj
+cd nginx-${NGINX_VERSION} && curl --silent --output /dev/null -L $pcre_tarball_url | tar xvj
 
 status "Downloading $rtmp_tarball_url"
-cd nginx-${NGINX_VERSION} && curl -L $rtmp_tarball_url | tar xvj
+cd nginx-${NGINX_VERSION} && curl --silent --output /dev/null -L $rtmp_tarball_url | tar xvj
 
 status "Compiling nginx"
 ./configure \
