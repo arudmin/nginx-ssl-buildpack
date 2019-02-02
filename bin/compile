@@ -49,6 +49,9 @@ status "$(pwd)"
 # cd nginx-${NGINX_VERSION}
 
 status "Compiling nginx"
+status "/${temp_dir}/nginx-${NGINX_VERSION}/nginx-rtmp-module-${NGINX_RTMP_MODULE_VERSION}"
+status "(ls /${temp_dir}/nginx-${NGINX_VERSION}/nginx-rtmp-module-${NGINX_RTMP_MODULE_VERSION})"
+
 (
 cd nginx-${NGINX_VERSION}
 ./configure \
