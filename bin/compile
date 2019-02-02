@@ -48,7 +48,7 @@ status "Compiling nginx"
   --prefix=/app/nginx \
   --with-http_ssl_module \
   --with-http_stub_status_module
-  --add-module=/app/${1}/nginx-${NGINX_VERSION}/nginx-rtmp-module-${NGINX_RTMP_MODULE_VERSION}
+  --add-module=/app${1}/nginx-${NGINX_VERSION}/nginx-rtmp-module-${NGINX_RTMP_MODULE_VERSION}
   --with-debug
 
 status "Installing nginx"
