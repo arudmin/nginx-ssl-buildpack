@@ -30,13 +30,13 @@ status "$ls_2"
 cd $1
 
 status "Downloading $nginx_tarball_url"
-curl --silent -L $nginx_tarball_url | tar xzv
+curl -L $nginx_tarball_url | tar xzv
 
 status "Downloading $pcre_tarball_url"
-cd ${1}/nginx-${NGINX_VERSION} && curl --silent -L $pcre_tarball_url | tar xvj
+cd ${1}/nginx-${NGINX_VERSION} && curl -L $pcre_tarball_url | tar xvj
 
 status "Downloading $rtmp_tarball_url"
-cd ${1}/nginx-${NGINX_VERSION} && curl --silent -L $rtmp_tarball_url | tar xvj
+cd ${1}/nginx-${NGINX_VERSION} && curl -L $rtmp_tarball_url | tar xzv
 
 status "Compiling nginx"
 ./configure \
@@ -55,7 +55,7 @@ ls_4=$(ls $ls_3)
 status "$ls_3"
 status "$ls_4"
 
-status "nginx-buildpack: Installed nginx-${NGINX_VERSION}"
+status "nginx-buildpack: Installed nginx-${NGINX_VERSION} with RTMP module"
 
 mkdir -p "$1/bin/"
 #cp "$root_directory/bin/nginx-cedar-14" "$1/bin/nginx"
