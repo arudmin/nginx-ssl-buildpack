@@ -53,7 +53,7 @@ ls_4=$(ls $ls_3)
 status "$ls_3"
 status "$ls_4"
 
-status "nginx-buildpack: Installed nginx-${NGINX_VERSION} with RTMP module"
+status "nginx-buildpack: Installed nginx-${NGINX_VERSION} with nginx-rtmp-module-${NGINX_RTMP_MODULE_VERSION}"
 
 mkdir -p "$1/bin/"
 
