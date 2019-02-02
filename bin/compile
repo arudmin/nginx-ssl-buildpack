@@ -41,7 +41,7 @@ curl -L $rtmp_tarball_url | tar xzv
 status "Compiling nginx"
 ./configure \
   --with-pcre=pcre-${PCRE_VERSION} \
-  --prefix=${1} \
+  --prefix=/tmp/nginx \
   --with-http_ssl_module \
   --with-http_stub_status_module \
   --add-module=${1}/nginx-${NGINX_VERSION}/nginx-rtmp-module-${NGINX_RTMP_MODULE_VERSION} \
@@ -61,11 +61,14 @@ mkdir -p "$1/bin/"
 
 
 
-cp "$1/sbin/nginx" "$1/bin/"
+cp "/tmp/nginx/sbin/nginx" "$1/bin/"
 status "nginx-buildpack: Added nginx to app/bin"
 
 cp "$root_directory/bin/start-nginx" "$1/bin/"
 status "nginx-buildpack: Added start-nginx to app/bin"
+
+cp "$root_directory/bin/start-nginx-solo" "$1/bin/"
+status "nginx-buildpack: Added start-nginx-solo to app/bin"
 
 mkdir -p "$1/config"
 cp "$root_directory/config/mime.types" "$1/config/"
