@@ -10,9 +10,11 @@ set -o pipefail   # dont ignore exit codes when piping output
 
 NGINX_VERSION=1.15.8
 PCRE_VERSION=8.21
+NGINX_RTMP_MODULE_VERSION=1.2.1
 
 nginx_tarball_url=http://nginx.org/download/nginx-${NGINX_VERSION}.tar.gz
 pcre_tarball_url=http://sourceforge.net/projects/pcre/files/pcre/${PCRE_VERSION}/pcre-${PCRE_VERSION}.tar.bz2/download
+rtmp_tarball_url=https://github.com/arut/nginx-rtmp-module/archive/v${NGINX_RTMP_MODULE_VERSION}.tar.gz
 
 status "This new NEW!"
 
@@ -33,12 +35,17 @@ curl -L $nginx_tarball_url | tar xzv
 status "Downloading $pcre_tarball_url"
 cd nginx-${NGINX_VERSION} && curl -L $pcre_tarball_url | tar xvj
 
+status "Downloading $rtmp_tarball_url"
+cd nginx-${NGINX_VERSION} && curl -L $rtmp_tarball_url | tar xvj
+
 status "Compiling nginx"
 ./configure \
   --with-pcre=pcre-${PCRE_VERSION} \
   --prefix=/app/nginx \
   --with-http_ssl_module \
   --with-http_stub_status_module
+  --add-module=/$1/nginx-${NGINX_VERSION}/nginx-rtmp-module-${NGINX_RTMP_MODULE_VERSION}
+  --with-debug
 
 status "Installing nginx"
 make install --silent
