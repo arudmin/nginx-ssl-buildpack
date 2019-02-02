@@ -27,20 +27,26 @@ status "$ls_1"
 status "$ls_2"
 
 # change to the BUILD_DIR ($1)
-cd $1
+##cd $1
+
+
+temp_dir=$(mktemp -d /tmp/nginx.XXXXXXXXXX)
+cd $temp_dir
+echo "Temp dir: $temp_dir"
+
 
 status "Downloading $nginx_tarball_url"
 curl -L $nginx_tarball_url | tar xzv
 
 status "Downloading $pcre_tarball_url"
-cd ${1}/nginx-${NGINX_VERSION} && curl -L $pcre_tarball_url | tar xvj
+cd nginx-${NGINX_VERSION} && curl -L $pcre_tarball_url | tar xvj
 
 status "Downloading $rtmp_tarball_url"
-cd ${1}/nginx-${NGINX_VERSION} && curl -L $rtmp_tarball_url | tar xzv
+curl -L $rtmp_tarball_url | tar xzv
 
 status "$(ls -la)"
 
-# cd ${1}/nginx-${NGINX_VERSION}
+cd nginx-${NGINX_VERSION}
 
 status "Compiling nginx"
 ./configure \
@@ -48,7 +54,7 @@ status "Compiling nginx"
   --prefix=/app/nginx \
   --with-http_ssl_module \
   --with-http_stub_status_module
-  --add-module=${1}/nginx-${NGINX_VERSION}/nginx-rtmp-module-${NGINX_RTMP_MODULE_VERSION}
+  --add-module=/${temp_dir}/nginx-${NGINX_VERSION}/nginx-rtmp-module-${NGINX_RTMP_MODULE_VERSION}
   --with-debug
 
 status "Installing nginx"
