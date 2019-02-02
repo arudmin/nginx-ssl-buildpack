@@ -38,7 +38,7 @@ cd ${1}/nginx-${NGINX_VERSION} && curl -L $pcre_tarball_url | tar xvj
 status "Downloading $rtmp_tarball_url"
 cd ${1}/nginx-${NGINX_VERSION} && curl -L $rtmp_tarball_url | tar xzv
 
-status "$(pwd)"
+status "$(ls -la)"
 
 # cd ${1}/nginx-${NGINX_VERSION}
 
@@ -48,7 +48,7 @@ status "Compiling nginx"
   --prefix=/app/nginx \
   --with-http_ssl_module \
   --with-http_stub_status_module
-  --add-module=/app${1}/nginx-${NGINX_VERSION}/nginx-rtmp-module-${NGINX_RTMP_MODULE_VERSION}
+  --add-module=${1}/nginx-${NGINX_VERSION}/nginx-rtmp-module-${NGINX_RTMP_MODULE_VERSION}
   --with-debug
 
 status "Installing nginx"
