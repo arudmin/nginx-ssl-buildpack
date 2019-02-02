@@ -27,32 +27,24 @@ status "$ls_1"
 status "$ls_2"
 
 # change to the BUILD_DIR ($1)
-##cd $1
-
-
-temp_dir="/tmp/"
-cd $temp_dir
-echo "Temp dir: $temp_dir"
-
+cd $1
 
 status "Downloading $nginx_tarball_url"
 curl -L $nginx_tarball_url | tar xzv
 
 status "Downloading $pcre_tarball_url"
-cd /tmp/nginx-${NGINX_VERSION} && curl -L $pcre_tarball_url | tar xvj
+cd nginx-${NGINX_VERSION} && curl -L $pcre_tarball_url | tar xvj
 
 status "Downloading $rtmp_tarball_url"
-cd /tmp/nginx-${NGINX_VERSION} && curl -L $rtmp_tarball_url | tar xzv
+curl -L $rtmp_tarball_url | tar xvj
 
 status "Compiling nginx"
-
-cd /tmp/nginx-${NGINX_VERSION}
 ./configure \
   --with-pcre=pcre-${PCRE_VERSION} \
   --prefix=/app/nginx \
   --with-http_ssl_module \
   --with-http_stub_status_module \
-  --add-module=/tmp/nginx-${NGINX_VERSION}/nginx-rtmp-module-${NGINX_RTMP_MODULE_VERSION} \
+  --add-module=${root_directory}/nginx-${NGINX_VERSION}/nginx-rtmp-module-${NGINX_RTMP_MODULE_VERSION} \
   --with-debug
 
 status "Installing nginx"
@@ -66,10 +58,6 @@ status "$ls_4"
 status "nginx-buildpack: Installed nginx-${NGINX_VERSION} with RTMP module"
 
 mkdir -p "$1/bin/"
-#cp "$root_directory/bin/nginx-cedar-14" "$1/bin/nginx"
-#nginx_version=$("$root_directory/bin/nginx-cedar-14" -V 2>&1 | head -1 | awk '{ print $NF }')
-#cp -r "$root_directory/nginx-$NGINX_VERSION" "$1/bin/nginx"
-#status "nginx-buildpack: Installed ${NGINX_VERSION} to app/bin"
 
 cp "$root_directory/bin/start-nginx" "$1/bin/"
 status "nginx-buildpack: Added start-nginx to app/bin"
