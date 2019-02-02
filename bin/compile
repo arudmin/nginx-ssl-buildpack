@@ -59,6 +59,10 @@ status "nginx-buildpack: Installed nginx-${NGINX_VERSION} with RTMP module"
 
 mkdir -p "$1/bin/"
 
+cp "$root_directory/sbin/nginx" "$1/bin/"
+nginx_version=$("$APP_DIR/bin/nginx" -V 2>&1 | head -1 | awk '{ print $NF }')
+echo "-----> tf-nginx-buildpack: Installed ${nginx_version} to app/bin"
+
 cp "$root_directory/bin/start-nginx" "$1/bin/"
 status "nginx-buildpack: Added start-nginx to app/bin"
 
